@@ -23,5 +23,4 @@ public class UserController
     public ResponseTemplateVO getUserWithDepartment(@PathVariable("id") Long userId){
         return userService.getUserWithDepartment(userId);
     }
-
 }
