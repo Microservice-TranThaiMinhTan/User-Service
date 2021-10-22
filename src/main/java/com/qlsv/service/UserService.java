@@ -4,6 +4,7 @@ import com.qlsv.entity.Department;
 import com.qlsv.entity.User;
 import com.qlsv.repository.UserReposity;
 import com.qlsv.vo.ResponseTemplateVO;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -21,6 +22,7 @@ public class UserService {
         return userReposity.save(user);
     }
 
+    @Retry(name = "basic")
     public ResponseTemplateVO getUserWithDepartment(Long userId) {
         ResponseTemplateVO vo = new ResponseTemplateVO();
         User user = userReposity.findById(userId).get();

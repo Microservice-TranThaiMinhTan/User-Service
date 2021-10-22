@@ -24,11 +24,11 @@ public class UserController
         return userService.getUserWithDepartment(userId);
     }
 
-    @Value("${welcome}")
-    private String welcome;
-
-    @GetMapping("/")
-    String helloWorld(){
-        return welcome;
-    }
+//    @Value("${welcome}")
+//    private String welcome;
+//
+//    @GetMapping("/")
+//    String helloWorld(){
+//        return welcome;
+//    }
 }
