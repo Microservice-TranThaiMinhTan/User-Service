@@ -1,12 +1,12 @@
-spring:
-  application:
-    name: user-service
-
-  config:
-    import: "optional:configserver:"
-  cloud:
-    config:
-      uri: http://localhost:8888/
+#spring:
+#  application:
+#    name: user-service
+#
+#  config:
+#    import: "optional:configserver:"
+#  cloud:
+#    config:
+#      uri: http://localhost:8888/
 
 resilience4j:
   retry:
