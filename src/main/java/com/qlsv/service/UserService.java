@@ -4,6 +4,8 @@ import com.qlsv.entity.Department;
 import com.qlsv.entity.User;
 import com.qlsv.repository.UserReposity;
 import com.qlsv.vo.ResponseTemplateVO;
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ public class UserService {
     }
 
     @Retry(name = "basic")
+    @RateLimiter(name = "multiRate", fallbackMethod = "fallBackMethod")
     public ResponseTemplateVO getUserWithDepartment(Long userId) {
         ResponseTemplateVO vo = new ResponseTemplateVO();
         User user = userReposity.findById(userId).get();
@@ -34,5 +37,9 @@ public class UserService {
         vo.setDepartment(department);
 
         return vo;
+    }
+
+    private ResponseTemplateVO fallBackMethod(Long userId, RequestNotPermitted requestNotPermitted){
+        return new ResponseTemplateVO(new User(), new Department());
     }
 }
