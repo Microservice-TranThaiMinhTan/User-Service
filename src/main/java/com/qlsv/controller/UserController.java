@@ -23,12 +23,4 @@ public class UserController
     public ResponseTemplateVO getUserWithDepartment(@PathVariable("id") Long userId){
         return userService.getUserWithDepartment(userId);
     }
-
-    @Value("${welcome}")
-    private String welcome;
-
-    @GetMapping("/")
-    String helloWorld(){
-        return welcome;
-    }
 }
